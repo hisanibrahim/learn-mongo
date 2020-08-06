@@ -21,7 +21,7 @@ const createCourse = async () => {
   // create an object based on model class
   const course = new Course({
     name: "Artificial intelligence and 21st century",
-    author: "Aravind",
+    author: "Hisan",
     tags: ["computer science", "ai"],
     isPublished: true,
   });
@@ -31,7 +31,10 @@ const createCourse = async () => {
 };
 
 const getCourses = async () => {
-  const courses = await Course.find();
+  const courses = await Course.find({ author: "Hisan" })
+    .limit(10)
+    .sort({ name: 1 })
+    .select({ name: 1, tags: 1 });
   console.log(courses);
 };
 

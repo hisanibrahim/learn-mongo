@@ -20,9 +20,9 @@ const Course = new mongoose.model("Course", courseSchema);
 const createCourse = async () => {
   // create an object based on model class
   const course = new Course({
-    name: "Introduction to common sense",
-    author: "Hisan",
-    tags: ["life", "knowledge"],
+    name: "Artificial intelligence and 21st century",
+    author: "Aravind",
+    tags: ["computer science", "ai"],
     isPublished: true,
   });
 
@@ -30,4 +30,10 @@ const createCourse = async () => {
   console.log(result);
 };
 
-createCourse();
+const getCourses = async () => {
+  const courses = await Course.find();
+  console.log(courses);
+};
+
+// createCourse();
+getCourses();

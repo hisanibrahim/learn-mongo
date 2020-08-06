@@ -9,6 +9,7 @@ mongoose
 const courseSchema = new mongoose.Schema({
   name: String,
   author: String,
+  price: Number,
   tags: [String],
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
@@ -20,9 +21,10 @@ const Course = new mongoose.model("Course", courseSchema);
 const createCourse = async () => {
   // create an object based on model class
   const course = new Course({
-    name: "Artificial intelligence and 21st century",
+    name: "The Complete Node.js Course",
     author: "Hisan",
-    tags: ["computer science", "ai"],
+    price: 300,
+    tags: ["coding", "learn"],
     isPublished: true,
   });
 
@@ -31,10 +33,22 @@ const createCourse = async () => {
 };
 
 const getCourses = async () => {
-  const courses = await Course.find({ author: "Hisan" })
+  // eq (equal)
+  // ne (not equal)
+  // gt (greater than)
+  // lt (less than)
+  // gte
+  // lte
+  // in
+  // nin
+
+  const courses = await Course
+    //  .find({ author: "Hisan" })
+    // .find({ price: 300 })
+    // .find({ price: { $gt: 300, $lt: 550 } })
+    .find({ price: { $in: [300, 500] } })
     .limit(10)
-    .sort({ name: 1 })
-    .select({ name: 1, tags: 1 });
+    .sort({ name: 1 });
   console.log(courses);
 };
 

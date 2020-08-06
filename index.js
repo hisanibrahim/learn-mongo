@@ -33,20 +33,12 @@ const createCourse = async () => {
 };
 
 const getCourses = async () => {
-  // eq (equal)
-  // ne (not equal)
-  // gt (greater than)
-  // lt (less than)
-  // gte
-  // lte
-  // in
-  // nin
+  // or
+  // and
 
-  const courses = await Course
-    //  .find({ author: "Hisan" })
-    // .find({ price: 300 })
-    // .find({ price: { $gt: 300, $lt: 550 } })
-    .find({ price: { $in: [300, 500] } })
+  const courses = await Course.find()
+    // .or([{ author: "Aravind" }, { price: 500 }])
+    .and([{ author: "Aravind" }, { isPublished: true }])
     .limit(10)
     .sort({ name: 1 });
   console.log(courses);

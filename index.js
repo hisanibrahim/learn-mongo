@@ -17,10 +17,17 @@ const courseSchema = new mongoose.Schema({
 // complile schema to model that gives a class
 const Course = new mongoose.model("Course", courseSchema);
 
-// create an object based on model class
-const course = new Course({
-  name: "Introduction to common sense",
-  author: "Hisan",
-  tags: ["life", "knowledge"],
-  isPublished: true,
-});
+const createCourse = async () => {
+  // create an object based on model class
+  const course = new Course({
+    name: "Introduction to common sense",
+    author: "Hisan",
+    tags: ["life", "knowledge"],
+    isPublished: true,
+  });
+
+  const result = await course.save();
+  console.log(result);
+};
+
+createCourse();

@@ -33,12 +33,7 @@ const createCourse = async () => {
 };
 
 const getCourses = async () => {
-  // or
-  // and
-
-  const courses = await Course.find()
-    // .or([{ author: "Aravind" }, { price: 500 }])
-    .and([{ author: "Aravind" }, { isPublished: true }])
+  const courses = await Course.find({ author: /.*aravind.*/i })
     .limit(10)
     .sort({ name: 1 });
   console.log(courses);

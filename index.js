@@ -21,11 +21,11 @@ const Course = new mongoose.model("Course", courseSchema);
 const createCourse = async () => {
   // create an object based on model class
   const course = new Course({
-    name: "The Complete Node.js Course",
+    name: "Mongo Bootcamp",
     author: "Hisan",
-    price: 300,
+    price: 1500,
     tags: ["coding", "learn"],
-    isPublished: true,
+    isPublished: false,
   });
 
   const result = await course.save();
@@ -37,13 +37,18 @@ const getCourses = async () => {
   const pageSize = 10;
   // /api/courses?pageNumber=2&pageSize=10
 
-  const courses = await Course.find({ author: /.*hisan.*/i })
-    .skip((pageNumber - 1) * pageSize)
-    .limit(10)
-    .sort({ name: 1 })
-    .count();
+  const courses = await Course.find({ author: /.*hisan.*/i, price: 2000 });
   console.log(courses);
 };
 
+const updateCourse = async (id) => {
+  const course = await Course.findById(id);
+
+  course.price = 2000;
+  course.save();
+  console.log(course);
+};
+
 // createCourse();
-getCourses();
+// getCourses();
+updateCourse("5f2d2dd44136e63d30bd6759");

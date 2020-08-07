@@ -6,3 +6,8 @@ Exercise 1
 - Get all the published frontend and backend courses
 - Sort them by their price in a desending order,
 - Pick only their name and author
+
+
+Exercise 2
+
+- Get all published courses that are $15 or more, or have the word 'by' in their title

@@ -33,7 +33,12 @@ const createCourse = async () => {
 };
 
 const getCourses = async () => {
+  const pageNumber = 2;
+  const pageSize = 10;
+  // /api/courses?pageNumber=2&pageSize=10
+
   const courses = await Course.find({ author: /.*hisan.*/i })
+    .skip((pageNumber - 1) * pageSize)
     .limit(10)
     .sort({ name: 1 })
     .count();

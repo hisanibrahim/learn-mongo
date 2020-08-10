@@ -55,6 +55,18 @@ const updateCourse = async (id) => {
   console.log(result);
 };
 
+const removeCourse = async (id) => {
+  // // const result = await Course.deleteMany({
+  // const result = await Course.deleteOne({
+  //   _id: id,
+  // });
+
+  const course = await Course.findByIdAndRemove(id);
+
+  console.log(course);
+};
+
 // createCourse();
 // getCourses("5f2d2dd44136e63d30bd6759");
-updateCourse("5f2d2dd44136e63d30bd6759");
+// updateCourse("5f2d2dd44136e63d30bd6759");
+removeCourse("5f2d2dd44136e63d30bd6759");

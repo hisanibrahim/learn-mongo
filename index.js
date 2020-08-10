@@ -32,23 +32,24 @@ const createCourse = async () => {
   console.log(result);
 };
 
-const getCourses = async () => {
-  const pageNumber = 2;
-  const pageSize = 10;
-  // /api/courses?pageNumber=2&pageSize=10
-
-  const courses = await Course.find({ author: /.*hisan.*/i, price: 2000 });
+const getCourses = async (id) => {
+  const courses = await Course.find({ _id: id });
   console.log(courses);
 };
 
 const updateCourse = async (id) => {
-  const course = await Course.findById(id);
+  const result = await Course.update(
+    { _id: id },
+    {
+      $set: {
+        price: 5000,
+      },
+    }
+  );
 
-  course.price = 2000;
-  course.save();
-  console.log(course);
+  console.log(result);
 };
 
 // createCourse();
-// getCourses();
+// getCourses("5f2d2dd44136e63d30bd6759");
 updateCourse("5f2d2dd44136e63d30bd6759");

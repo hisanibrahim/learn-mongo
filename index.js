@@ -38,12 +38,17 @@ const getCourses = async (id) => {
 };
 
 const updateCourse = async (id) => {
-  const result = await Course.update(
-    { _id: id },
+  const result = await Course.findByIdAndUpdate(
+    id,
     {
       $set: {
-        price: 5000,
+        price: 8000,
       },
+    },
+    // This argument is for returning document after updated
+    // Or it will return document before updating
+    {
+      new: true,
     }
   );
 

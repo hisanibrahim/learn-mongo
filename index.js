@@ -10,24 +10,36 @@ mongoose
 
 // create schema
 const courseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 64,
+    // match: /pattern/,
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ["technology"],
+  },
   author: String,
+  tags: [String],
+  date: { type: Date, default: Date.now },
+  isPublished: Boolean,
   price: {
     type: Number,
     required: function () {
       return this.isPublished;
     },
   },
-  tags: [String],
-  date: { type: Date, default: Date.now },
-  isPublished: Boolean,
 });
 
 const Course = new mongoose.model("Course", courseSchema);
 
 const createCourse = async () => {
   const course = new Course({
-    // name: "Mongo Bootcamp",
+    name: "Mon",
+    category: "-",
     author: "Hisan",
     // price: 1500,
     tags: ["coding", "learn"],

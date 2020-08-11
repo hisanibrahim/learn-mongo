@@ -12,7 +12,12 @@ mongoose
 const courseSchema = new mongoose.Schema({
   name: { type: String, required: true },
   author: String,
-  price: Number,
+  price: {
+    type: Number,
+    required: function () {
+      return this.isPublished;
+    },
+  },
   tags: [String],
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
@@ -24,9 +29,9 @@ const createCourse = async () => {
   const course = new Course({
     // name: "Mongo Bootcamp",
     author: "Hisan",
-    price: 1500,
+    // price: 1500,
     tags: ["coding", "learn"],
-    isPublished: false,
+    isPublished: true,
   });
 
   try {

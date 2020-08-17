@@ -51,22 +51,20 @@ const Course = new mongoose.model("Course", courseSchema);
 const createCourse = async () => {
   const course = new Course({
     name: "Mongodb course",
-    category: "technology",
+    category: "-",
     author: "Hisan",
     price: 1500,
-    // tags: null,
-    // tags: [],
+    tags: null,
     isPublished: true,
   });
 
   try {
     const result = await course.save();
 
-    // Another way to validate without saving data
-    // const result = await course.validate();
     console.log(result);
   } catch (err) {
-    console.error(err.message);
+    for (field in err.errors) 
+    console.error(err.errors[field].message);
   }
 };
 
